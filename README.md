@@ -1,2 +1,2 @@
 # LoanBroker
-Magnus er bög
+Magnus er bög - hilsen Kristian
