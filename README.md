@@ -1,1 +1,2 @@
 # LoanBroker
+Magnus er bög
