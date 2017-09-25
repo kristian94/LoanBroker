@@ -1,2 +1,2 @@
 # LoanBroker
-"Magnus er bög - hilsen Kristian - hilsen Nogasm" - hilsen Kristian
+""Magnus er bög - hilsen Kristian - hilsen Nogasm" - hilsen Kristian" - hilsen xFissen
