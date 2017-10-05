@@ -1,4 +1,7 @@
-const amqplib = require('amqplib')
+const amqplib = require('amqplib');
+const defaults = {
+    durable: false
+}
 
 module.exports = {
     Publisher,
@@ -19,7 +22,7 @@ function Consumer(url, options){
 
 
 
-Publisher.prototype.send = async function(data, type = 'direct'){
+Publisher.prototype.send = async function(data, type = 'direct', routingKey = ''){
     try{
         const channel = await this.channel;
         if(!!this.exchange){
@@ -27,9 +30,9 @@ Publisher.prototype.send = async function(data, type = 'direct'){
                 exchange: this.exchange,
                 queue: this.queue,
                 type: type,
-                data: data
+                data: data,
+                routingKey: routingKey
             });
-            // this.exchange, this.queue, type, data
         }else{
             sendToQueue(channel, {
                 queue: this.queue,
@@ -63,22 +66,28 @@ Consumer.prototype.read = async function(onMessage, type = 'direct'){
 };
 
 async function publishToExchange(channel, options = {}){
+
     const exchange = options.exchange;
     const queue = options.queue;
     const type = options.type;
     const data = options.data;
-    channel.assertExchange(exchange, type);
+    const durable = options.durable || defaults.durable;
+    console.log(`publishing data to exchange(${exchange}) using type(${type})`);
+    channel.assertExchange(exchange, type, {durable});
     channel.publish(exchange, queue, new Buffer(JSON.stringify(data)));
-    console.log(`published data to exchange(${exchange}) using type(${type})`);
+    console.log(`data sent: `);
     console.log(data);
 }
 
 async function sendToQueue(channel, options = {}){
+
     const queue = options.queue;
     const data = options.data;
-    channel.assertQueue(queue);
+    const durable = options.durable || defaults.durable;
+    console.log(`sending data to queue(${queue})`);
+    channel.assertQueue(queue, {durable});
     channel.sendToQueue(queue, new Buffer(JSON.stringify(data)));
-    console.log(`sent data to queue(${queue}) using type(${type})`);
+    console.log('data sent:')
     console.log(data);
 }
 
@@ -86,8 +95,9 @@ async function subscribeToExchange(channel, options = {}){
     const exchange = options.exchange;
     const type = options.type;
     const onMessage = options.onMessage;
-    channel.assertExchange(exchange, type);
-    const ok = await channel.assertQueue('', {exclusive: true});
+    const durable = options.durable || defaults.durable;
+    channel.assertExchange(exchange, type, defaults);
+    const ok = await channel.assertQueue('', {exclusive: true, durable});
     const queue = ok.queue;
     channel.bindQueue(queue, exchange, '');
     channel.consume(queue, onMessage);
@@ -96,7 +106,8 @@ async function subscribeToExchange(channel, options = {}){
 async function consumeFromQueue(channel, options = {}){
     const queue = options.queue;
     const onMessage = options.onMessage;
-    channel.assertQueue(queue);
+    const durable = options.durable || defaults.durable;
+    channel.assertQueue(queue, {durable});
     channel.consume(queue, onMessage);
 }
 

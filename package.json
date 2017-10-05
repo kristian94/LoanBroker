@@ -1,0 +1,22 @@
+{
+  "name": "loan-broker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd SOAP Server && npm i && cd ../Credit Score && npm i && cd ../Log && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristian94/LoanBroker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kristian94/LoanBroker/issues"
+  },
+  "homepage": "https://github.com/kristian94/LoanBroker#readme",
+  "dependencies": {
+    "amqplib": "^0.5.1"
+  }
+}
