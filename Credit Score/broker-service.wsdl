@@ -1,0 +1,84 @@
+<definitions name="BrokerService"
+             targetNamespace="http://localhost:8000/wsdl/BrokerService.wsdl"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://localhost:8000/wsdl/BrokerService.wsdl"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <!--<complexType name="offerList">-->
+                <!--<complexContent mixed="false">-->
+                    <!--<restriction base="soapenc:Array">-->
+                        <!--<attribute arrayType='offer[]' ref='soapenc:arrayType' />-->
+                    <!--</restriction>-->
+                <!--</complexContent>-->
+    <!--</complexType>-->
+
+    <complexType name="offer">
+        <all>
+            <element
+                minOccurs="0"
+                maxOccurs="1"
+                name="offerId"
+                type="xsd:integer"
+            />
+            <element
+                minOccurs="0"
+                maxOccurs="1"
+                name="bankName"
+                type="xsd:string"
+            />
+            <element
+                minOccurs="0"
+                maxOccurs="1"
+                name="interestRate"
+                type="xsd:decimal"
+            />
+        </all>
+    </complexType>
+
+    <message name="BrokeRequest">
+        <part name="ssn" type="xsd:string"/>
+        <part name="durationInMonths" type="xsd:integer"/>
+        <part name="amount" type="xsd:integer"/>
+    </message>
+
+    <message name="BrokeResponse">
+        <part name="greeting" type="xsd:string"/>
+    </message>
+
+    <portType name="BrokerPortType">
+        <operation name="broke">
+            <input message="tns:BrokeRequest"/>
+            <output message="tns:BrokeResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="BrokerBinding" type="tns:BrokerPortType">
+        <soap:binding style="rpc"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="broke">
+            <soap:operation soapAction="broke"/>
+            <input>
+                <soap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="urn:localhost:8000:helloservice"
+                        use="encoded"/>
+            </input>
+
+            <output>
+                <soap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="urn:localhost:8000:helloservice"
+                        use="encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="BrokerService">
+        <documentation>WSDL File for HelloService</documentation>
+        <port binding="tns:BrokerBinding" name="BrokerPort">
+            <soap:address
+                    location="http://localhost:8000/wsdl" />
+        </port>
+    </service>
+</definitions>
