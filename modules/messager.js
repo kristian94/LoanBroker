@@ -20,8 +20,6 @@ function Consumer(url, options){
     this.channel = getChannel.call(this);
 }
 
-
-
 Publisher.prototype.send = async function(data, type = 'direct', routingKey = ''){
     try{
         const channel = await this.channel;
@@ -118,16 +116,7 @@ function bindOptions(url, options){
     this.exchange = options.exchange ? prepend + options.exchange : '';
 }
 
-async function getConnection(){
-    // console.log(this.url);
-    console.log(this)
-    console.log(`connecting to url: ${this.url}...`)
-    return amqplib.connect(this.url);
-}
-
 async function getChannel(){
-    // console.log('a1')
     const connection = await this.connection;
-    // console.log('a2')
     return await connection.createChannel();
 }

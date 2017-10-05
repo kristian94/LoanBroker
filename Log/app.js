@@ -2,7 +2,7 @@ const url = 'amqp://datdb.cphbusiness.dk';
 const messager = require('../modules/messager');
 const consumer = new messager.Consumer(url, {
     queue: 'log'
-})
+});
 
 consumer.read(logMsg);
 
@@ -31,4 +31,3 @@ function getStamp(){
                         : input;
     }
 }
-
