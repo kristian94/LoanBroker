@@ -9,9 +9,8 @@ const consumer = new messager.Consumer(url, {
 consumer.read(logMsg);
 
 function logMsg(msg){
-
-    const temp = JSON.parse(msg.content.toString()); // af en eller anden grund skal der parses 2 gange....
-    const obj = JSON.parse(temp);
+    
+    const obj = JSON.parse(msg.content.toString());
 
     const stamp = formatStamp(obj.isoStamp);
     const appName = !!obj.appName ? obj.appName : '';

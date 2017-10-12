@@ -21,7 +21,7 @@ function buildLogObj(msgString){
 
 Logger.prototype.log = function (msgString) {
     const logObj = buildLogObj.call(this, msgString);
-    publisher.send(JSON.stringify(logObj));
+    publisher.send(logObj);
 };
 
 module.exports = appName => {

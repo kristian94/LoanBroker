@@ -13,7 +13,7 @@ const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
 consumer.read(msgIn => {
     creditScore.enhanceMsgWithScore(msgIn).then(msgOut => {
         // logger.log('Credit Score')
-        logger.log(JSON.stringify(msgOut));
+        logger.log(msgOut);
 
     });
 });
