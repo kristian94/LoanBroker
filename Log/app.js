@@ -1,4 +1,6 @@
 const url = 'amqp://datdb.cphbusiness.dk';
+const colors = require('colors');
+
 const messager = require('../modules/messager');
 const consumer = new messager.Consumer(url, {
     queue: 'log'
@@ -7,27 +9,19 @@ const consumer = new messager.Consumer(url, {
 consumer.read(logMsg);
 
 function logMsg(msg){
-    const stamp = getStamp();
-    const msgContent = msg.content.toString();
 
-    console.log(`${stamp} | ${msgContent}`);
+    const temp = JSON.parse(msg.content.toString()); // af en eller anden grund skal der parses 2 gange....
+    const obj = JSON.parse(temp);
+
+    const stamp = formatStamp(obj.isoStamp);
+    const appName = !!obj.appName ? obj.appName : '';
+    const msgString = obj.msgString;
+
+    (!!appName) ? console.log(`${stamp} @(${appName}): `.green + msgString.yellow) :
+                  console.log(`${stamp}: `.green + msgString.yellow);
 }
 
-function getStamp(){
-    const now = new Date();
-    return dateString(now);
-
-    function dateString(date){
-        const h = date.getHours();
-        const m = date.getMinutes();
-        const s = date.getSeconds();
-
-        return `${twoDigits(h)}:${twoDigits(m)}:${twoDigits(s)}`;
-    }
-
-    function twoDigits(input){
-        const oneDigit = input.toString().length == 1;
-        return oneDigit ? `0${input}`
-                        : input;
-    }
+function formatStamp(stamp){
+    const index = stamp.indexOf('T');
+    return stamp.substring(index+1, index+9);
 }

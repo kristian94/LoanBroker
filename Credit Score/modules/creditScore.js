@@ -23,6 +23,6 @@ async function getCreditScore(ssn){
 }
 
 module.exports = {
-    get: getCreditScore
+    enhanceMsgWithScore: enhanceMsgWithScore
 };
 

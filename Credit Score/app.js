@@ -1,34 +1,34 @@
-const messager = require('./messager');
-const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
-    exchange: 'kntestexchange'
+const messager = require('../modules/messager');
+const creditScore = require('./modules/creditScore');
+const logger = require('../modules/logger')('Credit Score');
+
+const consumer = new messager.Consumer('amqp://datdb.cphbusiness.dk', {
+    queue: 'credit-score'
 });
 
-// async function run(){
-//     const consumer = await publisher.channel;
-//     console.log(consumer);
-// }
-//
-// run();
+const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
+    queue: ''
+});
 
-publisher.send({name: 'Jon', age: 21, time: new Date().getMinutes()}, 'fanout');
+consumer.read(msgIn => {
+    creditScore.enhanceMsgWithScore(msgIn).then(msgOut => {
+        // logger.log('Credit Score')
+        logger.log(JSON.stringify(msgOut));
 
+    });
+});
 
+// const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
+//     exchange: 'test-get-banks'
+// });
 
+function asJson(string){
+    if(typeof string === 'string'){
+        return JSON.toJSON(string);
+    }else if(string !== null && typeof string === 'object'){
+        return string
+    }else{
+        throw new error('input was not a string or object');
+    }
 
-
-// const messager = require('./messager-old');
-//
-// const consumer = new messager('amqp://datdb.cphbusiness.dk');
-//
-// consumer.publish({msg: 'hello'})
-
-
-
-
-
-// async function run(){
-//     const consumer = await require('amqplib').connect('amqp://datdb.cphbusiness.dk');
-//     console.log(consumer);
-// }
-
-// run();
+}

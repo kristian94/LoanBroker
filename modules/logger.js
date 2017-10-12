@@ -4,11 +4,28 @@ const publisher = new messager.Publisher(url, {
     queue: 'log'
 });
 
-
-function log(msg){
-    publisher.send(msg);
+function Logger(options = {}){
+    this.appName = options.appName || '';
 }
 
-module.exports = {
-    log
+function buildLogObj(msgString){
+    const appName = this.appName;
+    const isoStamp = new Date().toISOString();
+
+    return {
+        isoStamp,
+        appName,
+        msgString
+    };
+}
+
+Logger.prototype.log = function (msgString) {
+    const logObj = buildLogObj.call(this, msgString);
+    publisher.send(JSON.stringify(logObj));
+};
+
+module.exports = appName => {
+    return new Logger({
+        appName
+    })
 };
