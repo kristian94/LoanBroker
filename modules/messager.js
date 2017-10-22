@@ -1,7 +1,7 @@
 const amqplib = require('amqplib');
 const defaults = {
     durable: false
-}
+};
 
 module.exports = {
     Publisher,
@@ -10,13 +10,13 @@ module.exports = {
 
 function Publisher(url, options){
     bindOptions.call(this, url, options);
-    this.connection = amqplib.connect(url);
+    this.connection = amqplib.connect(this.url);
     this.channel = getChannel.call(this);
 }
 
 function Consumer(url, options){
     bindOptions.call(this, url, options);
-    this.connection = amqplib.connect(url);
+    this.connection = amqplib.connect(this.url);
     this.channel = getChannel.call(this);
 }
 
@@ -58,7 +58,6 @@ Consumer.prototype.read = async function(onMessage, options = {}){
 async function publishToExchange(channel, options = {}){
 
     const exchange = options.exchange;
-    const queue = options.queue;
     const type = options.type;
     const data = options.data;
     const durable = options.durable || defaults.durable;
@@ -84,14 +83,14 @@ async function sendToQueue(channel, options = {}){
     channel.assertQueue(queue, {durable});
     channel.sendToQueue(queue, new Buffer(JSON.stringify(data)));
 
-    console.log('data sent:')
+    console.log('data sent:');
     console.log(data);
 }
 
 async function subscribeToExchange(channel, options = {}){
     const exchange = options.exchange;
     const type = options.type;
-    const isExclusive = options.type !== 'fanout'
+    const isExclusive = options.type !== 'fanout';
     const onMessage = options.onMessage;
     const durable = options.durable || defaults.durable;
     const bindingKeys = options.bindingKeys || [''];
@@ -102,21 +101,29 @@ async function subscribeToExchange(channel, options = {}){
     bindingKeys.forEach(bindingKey => {
         channel.bindQueue(queue, exchange, bindingKey);
     });
-    channel.consume(queue, onMessage);
+    channel.consume(queue, msg => {
+        const parsed = JSON.parse(msg.content.toString());
+        onMessage(msg, parsed);
+    });
 }
 
 async function consumeFromQueue(channel, options = {}){
+
     const queue = options.queue;
     const onMessage = options.onMessage;
     const durable = options.durable || defaults.durable;
 
     channel.assertQueue(queue, {durable});
-    channel.consume(queue, onMessage);
+    channel.consume(queue, msg => {
+        const parsed = JSON.parse(msg.content.toString());
+        onMessage(msg, parsed);
+    });
 }
 
 function bindOptions(url, options){
     const prepend = 'ckkm-';
     this.url = options.url || 'amqp://datdb.cphbusiness.dk';
+    // this.url = 'amqp://localhost';
     this.queue = options.queue ? prepend + options.queue : '';
     this.exchange = options.exchange ? prepend + options.exchange : '';
 }
@@ -126,8 +133,3 @@ async function getChannel(){
     return await connection.createChannel();
 }
 
-function stringOrStringify(input){
-    const isObj = input !== null && typeof input === 'oject';
-
-    return isObj ? JSON.stringify(input) : input;
-}

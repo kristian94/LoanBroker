@@ -8,13 +8,11 @@ const consumer = new messager.Consumer(url, {
 
 consumer.read(logMsg);
 
-function logMsg(msg){
-    
-    const obj = JSON.parse(msg.content.toString());
+function logMsg(msg, parsed){
 
-    const stamp = formatStamp(obj.isoStamp);
-    const appName = !!obj.appName ? obj.appName : '';
-    const msgString = obj.msgString;
+    const stamp = formatStamp(parsed.isoStamp);
+    const appName = !!parsed.appName ? parsed.appName : '';
+    const msgString = parsed.msgString;
 
     (!!appName) ? console.log(`${stamp} @(${appName}): `.green + msgString.yellow) :
                   console.log(`${stamp}: `.green + msgString.yellow);
@@ -24,3 +22,5 @@ function formatStamp(stamp){
     const index = stamp.indexOf('T');
     return stamp.substring(index+1, index+9);
 }
+
+console.log('Log running');

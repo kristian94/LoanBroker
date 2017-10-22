@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd SOAP Server && npm i && cd ../Credit Score && npm i && cd ../Log && npm i"
+    "postinstall": "cd soap-server && npm i && cd ../credit-score && npm i && cd ../log && npm i",
+    "start": "npm --prefix credit-score start | npm --prefix log start",
+    "test-01": "npm --prefix credit-score start | "
   },
   "repository": {
     "type": "git",

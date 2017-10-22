@@ -1,0 +1,38 @@
+// ========== FUNCTIONS ==========
+@function brighten($color, $lightenFactor, $desatFactor)
+  @return desaturate(lighten($color, $lightenFactor), $desatFactor)
+
+// ========== FONTS ==========
+@font-face
+  font-family: 'Title'
+  src: url('../fonts/Clip.ttf')
+
+// ========== COLORS ==========
+$_grey-lighten-factor: 10
+$c-grey-100: #141414
+$c-grey-200: lighten($c-grey-100, $_grey-lighten-factor)
+$c-grey-300: lighten($c-grey-200, $_grey-lighten-factor)
+$c-grey-400: lighten($c-grey-300, $_grey-lighten-factor)
+$c-grey-500: lighten($c-grey-400, $_grey-lighten-factor)
+$c-grey-600: lighten($c-grey-500, $_grey-lighten-factor)
+$c-grey-700: lighten($c-grey-600, $_grey-lighten-factor)
+$c-grey-800: lighten($c-grey-700, $_grey-lighten-factor)
+$c-grey-900: lighten($c-grey-800, $_grey-lighten-factor)
+
+
+$_red-lighten-factor: 1.3
+$_red-desat-factor: 1.1
+
+$c-red-100: #710B23
+$c-red-200: brighten($c-red-100, $_red-lighten-factor, $_red-desat-factor)
+$c-red-300: brighten($c-red-200, $_red-lighten-factor, $_red-desat-factor)
+$c-red-400: brighten($c-red-300, $_red-lighten-factor, $_red-desat-factor)
+$c-red-500: brighten($c-red-400, $_red-lighten-factor, $_red-desat-factor)
+
+
+// ========== SPACING ==========
+$m-100: 4px
+$m-200: 8px
+
+
+// ========== MISC ==========

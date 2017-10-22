@@ -1,12 +1,12 @@
 const soap = require('soap');
 const url = 'http://138.68.85.24:8080/CreditScoreService/CreditScoreService?wsdl';
 
-async function enhanceMsgWithScore(_msg){
-    const msg = Object.assign({}, msg);
+async function enhanceMsgWithScore(msgIn){
+    const msg = Object.assign({}, msgIn);
     if(msg.ssn === null || msg.ssn === undefined){
         throw new Error('Missing key "ssn"');
     }
-    const creditScore = await getCreditScore(ssn);
+    const creditScore = await getCreditScore(msg.ssn);
     msg.creditScore = creditScore;
     return msg;
 }
