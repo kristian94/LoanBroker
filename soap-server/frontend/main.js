@@ -177,10 +177,12 @@ broakerForm.addEventListener('submit', function(e){
 });
 
 function postBroke(obj){
-    return fetch('/broke', {
+    return fetch('loanbroker/broke', {
         method: 'POST',
         headers: defaultHeaders,
         body: obj
+    }).then(res => {
+        return res.json();
     })
 }
 
