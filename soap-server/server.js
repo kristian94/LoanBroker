@@ -99,7 +99,7 @@ const xml = require('fs').readFileSync('broker-service.wsdl', 'utf8');
 //http server example
 const server = http.createServer(app);
 
-server.listen(8000);
+server.listen(8005);
 
 const soapServer = soap.listen(server, '/wsdl', brokerService, xml);
 
