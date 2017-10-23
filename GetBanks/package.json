@@ -1,0 +1,13 @@
+{
+  "name": "WSDLClient",
+  "version": "0.0.1",
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "express": "^4.15.5",
+    "fs": "0.0.1-security",
+    "soap": "^0.21.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "WSDLTest",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.15.5",
+    "fs": "0.0.1-security",
+    "soap": "^0.21.0"
+  },
+  "scripts": {
+    "start": "node ruleservice.js"
+  }
+}
