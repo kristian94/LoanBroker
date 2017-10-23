@@ -155,14 +155,12 @@ broakerForm.addEventListener('submit', function(e){
     // }, 1500);
     //TESTER END
 
-    postBroke(obj).then(res => {
+    ajaxPostBroke(obj, res => {
         updateResultView(res);
         toggleView();
         loader.hide();
-    }).catch(err => {
-        alert('noget gik galt...');
-        loader.hide();
     });
+
 
     // postBrokeAsync(obj, function(res){
     //     updateResultView(res);
@@ -176,17 +174,27 @@ broakerForm.addEventListener('submit', function(e){
     return false;
 });
 
-function postBroke(obj){
-    obj.amount = obj.amount.replace(/\./g, '');
-
-    return fetch('broke', {
+function ajaxPostBroke(obj, s, e){
+    const ajax = $.ajax({
+        url: 'broke',
         method: 'POST',
-        headers: defaultHeaders,
-        body: obj
-    }).then(res => {
-        return res.json();
-    })
+        data: JSON.stringify(obj),
+        contentType: 'application/json',
+        error: e
+    }).done(s)
 }
+
+// function postBroke(obj){
+//     obj.amount = obj.amount.replace(/\./g, '');
+//
+//     return fetch('broke', {
+//         method: 'POST',
+//         headers: defaultHeaders,
+//         body: obj
+//     }).then(res => {
+//         return res.json();
+//     })
+// }
 
 function updateResultView(obj){
     const bankNameEl = document.getElementById('bank-name');
