@@ -4,7 +4,7 @@ const messager = require('../modules/messager');
 const express = require('express');
 const app = express();
 
-app.use(express.static('frontend'));
+app.use('/loanbroker', express.static('frontend'));
 
 const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
     queue: 'credit-score'
