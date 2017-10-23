@@ -108,4 +108,6 @@ Hvis der ikke bliver modtaget en message fra Router, bliver der ventet to sekund
 
 ## Testability
 
+I de komponenter der er lavet i Go, er der lavet en tilsvarende fil lignende: *_test.go, der tester de individuelle komponenter. Derudover er der en main_test.go der tester alle de komponenter samme.
+
 ## Web service description
