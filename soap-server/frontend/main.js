@@ -161,7 +161,6 @@ broakerForm.addEventListener('submit', function(e){
         loader.hide();
     });
 
-
     // postBrokeAsync(obj, function(res){
     //     updateResultView(res);
     //     toggleView();
@@ -199,11 +198,18 @@ function ajaxPostBroke(obj, s, e){
 function updateResultView(obj){
     const bankNameEl = document.getElementById('bank-name');
     const interestRateEl = document.getElementById('interest-rate');
+    
+    const bankName = obj.bank;
+    const decimalFormatted = formatDecimal(obj.interestRate);
 
-    bankNameEl.innerHTML = obj.bank;
-    interestRateEl.innerHTML = `${obj.interestRate} %`;
+    bankNameEl.innerHTML = bankName;
+    interestRateEl.innerHTML = `${decimalFormatted} %`;
 }
 
-
+function formatDecimal(deci){
+    const str = deci.toString();
+    const regex = /\d{0,}[\.\,]\d{0,2}/;
+    return str.match(regex)[0];
+}
 
 
