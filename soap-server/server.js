@@ -3,8 +3,12 @@ const http = require('http');
 const messager = require('../modules/messager');
 const express = require('express');
 const app = express();
+const cors = require('cors')
+
 
 app.use('/loanbroker', express.static('frontend'));
+app.use(cors());
+
 
 const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
     queue: 'credit-score'
