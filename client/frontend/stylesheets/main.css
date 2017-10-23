@@ -1,14 +1,132 @@
-html, body {
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Libre+Barcode+39+Text|Nixie+One");
+* {
+  margin: 0;
+  padding: 0; }
+
+html, body, .content {
   width: 100%;
   height: 100%; }
 
-.top-bar {
+.loader {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.13s ease-in;
+  border: 2px solid rgba(0, 0, 0, 0.035);
+  border-radius: 50%;
+  border-top: 2px solid #72c9b5;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+  grid-column: 1/span 3;
+  grid-row: 2/span 1;
+  justify-self: center;
+  align-self: center; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.content {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr; }
-  .top-bar .top-bar-bg {
-    z-index: -1;
+  grid-template-columns: 1fr 600px 1fr;
+  grid-template-rows: 120px 100px 400px 1fr;
+  background-image: url("../img/etienne-martin-2000-1333jpg.jpg"); }
+  .content .top-bar-bg {
+    grid-column: 1/span 3;
+    grid-row: 1/span 1;
+    z-index: 0;
     align-self: stretch;
-    justify-self: stretch; }
+    justify-self: stretch;
+    border-bottom: 1px solid #e0e0e0; }
+  .content .top-bar-header {
+    grid-column: 1/span 3;
+    grid-row: 1/span 1;
+    z-index: 1;
+    pointer-events: none;
+    display: inline;
+    align-self: center;
+    justify-self: center;
+    color: #616161;
+    font-family: "Great Vibes", sans-serif;
+    font-size: 70px; }
+  .content .broaker-form-container {
+    grid-column: 2/span 1;
+    grid-row: 3/span 1;
+    align-self: stretch;
+    justify-self: stretch;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #c7c7c7;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.08), 3px 3px 5px 5px rgba(0, 0, 0, 0.05);
+    padding: 15px; }
+    .content .broaker-form-container form:valid button {
+      color: #0B7159; }
+    .content .broaker-form-container form {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-right: 1fr 1fr 1fr 1fr; }
+      .content .broaker-form-container form .broaker-label {
+        align-self: center;
+        justify-self: right;
+        font-size: 28px;
+        padding-right: 25px;
+        font-family: "Nixie One", sans-serif;
+        color: #141414; }
+      .content .broaker-form-container form input[type=text] {
+        width: 180px;
+        align-self: center;
+        justify-self: left;
+        background: none;
+        border: none;
+        border-bottom: 2px solid #616161;
+        font-size: 28px;
+        font-family: "Nixie One", sans-serif;
+        color: #474747;
+        transition: 0.11s ease-in; }
+      .content .broaker-form-container form input[type=text]:valid {
+        border-bottom: 2px solid #0B7159; }
+      .content .broaker-form-container form input[type=text]:disabled {
+        border-bottom: 2px solid #adadad;
+        color: #949494; }
+      .content .broaker-form-container form button {
+        grid-column: 1/span 2;
+        align-self: center;
+        justify-self: center;
+        font-family: "Libre Barcode 39 Text", sans-serif;
+        border: none;
+        font-size: 50px;
+        background: none;
+        color: #7a7a7a;
+        letter-spacing: 4px;
+        transition: 1.25s ease-in; }
+      .content .broaker-form-container form button:disabled {
+        transition: 0.125s ease-in;
+        color: #adadad; }
+  .content .footer {
+    z-index: 99;
+    grid-column: 1/span 99;
+    grid-row: 1/span 99;
+    align-self: end;
+    justify-self: stretch;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.9));
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr); }
+    .content .footer div {
+      align-self: center;
+      justify-self: center;
+      font-family: "Great Vibes", sans-serif;
+      font-size: 30px;
+      color: white; }
 
 /*# sourceMappingURL=main.css.map */

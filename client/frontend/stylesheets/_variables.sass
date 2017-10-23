@@ -3,9 +3,9 @@
   @return desaturate(lighten($color, $lightenFactor), $desatFactor)
 
 // ========== FONTS ==========
-@font-face
-  font-family: 'Title'
-  src: url('../fonts/Clip.ttf')
+//@font-face
+//  font-family: 'Title'
+//  src: url('../fonts/Clip.ttf')
 
 // ========== COLORS ==========
 $_grey-lighten-factor: 10
@@ -20,8 +20,20 @@ $c-grey-800: lighten($c-grey-700, $_grey-lighten-factor)
 $c-grey-900: lighten($c-grey-800, $_grey-lighten-factor)
 
 
-$_red-lighten-factor: 1.3
-$_red-desat-factor: 1.1
+$_green-lighten-factor: 7.5
+$_green-desat-factor: 7.5
+
+$c-green-100: #0B7159
+$c-green-200: brighten($c-green-100, $_green-lighten-factor, $_green-desat-factor)
+$c-green-300: brighten($c-green-200, $_green-lighten-factor, $_green-desat-factor)
+$c-green-400: brighten($c-green-300, $_green-lighten-factor, $_green-desat-factor)
+$c-green-500: brighten($c-green-400, $_green-lighten-factor, $_green-desat-factor)
+$c-green-600: brighten($c-green-500, $_green-lighten-factor, $_green-desat-factor)
+$c-green-700: brighten($c-green-600, $_green-lighten-factor, $_green-desat-factor)
+
+
+$_red-lighten-factor: 13
+$_red-desat-factor: 11
 
 $c-red-100: #710B23
 $c-red-200: brighten($c-red-100, $_red-lighten-factor, $_red-desat-factor)

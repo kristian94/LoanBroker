@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bög Bojs' Loan Broaker</title>
+    <link rel="stylesheet" href="stylesheets/input-reset.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
 </head>
 <body>
-    
+    <div class="content">
+        <div class="top-bar-bg"></div>
+        <div class="top-bar-header">Bög Bojs' Loan Broaker</div>
+        <div class="loader"></div>
+        <div class="broaker-form-container">
+            <form name="broaker">
+                <label class="broaker-label" for="ssn">ssn</label>
+                <input name="ssn" id="ssn" type="text" pattern="^\d{6}-\d{4}$" required>
+
+                <label class="broaker-label" for="amount">amount</label>
+                <input name="amount" id="amount" type="text" pattern="^(\d{1,3})(\.\d{3})*$" required>
+
+                <label class="broaker-label" for="duration">duration (months)</label>
+                <input name="duration" id="duration" type="text" pattern="^\d{0,}$" required>
+
+                <button type="submit">broke</button>
+            </form>
+
+        </div>
+        <div class="footer">
+            <div>Kristoffer "Fissen" Noga</div>
+            <div>Borum Borum</div>
+            <div>Manus Larsson</div>
+            <div>Kristian Nielsen</div>
+        </div>
+    </div>
+
+    <script src="main.js">
+    </script>
 </body>
 </html>

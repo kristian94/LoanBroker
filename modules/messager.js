@@ -1,6 +1,7 @@
 const amqplib = require('amqplib');
 const defaults = {
-    durable: false
+    durable: false,
+    noAck: true
 };
 
 module.exports = {
