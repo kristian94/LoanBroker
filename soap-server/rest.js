@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
 const messager = require('../modules/messager');
+const cors = require('cors');
 
 const port = 8005;
 
 app.use(express.json());
 app.use('/loanbroker', express.static('frontend'));
+app.use(cors());
+
 
 const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
     queue: 'credit-score'
@@ -119,7 +122,6 @@ app.post('/loanbroker/broke', function(req, res){
         res.status(400);
         res.send('Request blocked, as the ssn is already being processed');
 
-
     }else{
         // we subscribe a callback to the ssnCallback module
         console.log(`waiting for response for ssn: ${ssn}`);
@@ -130,8 +132,6 @@ app.post('/loanbroker/broke', function(req, res){
             cancelTimeout();
             res.send(offer);
         });
-
-
     }
 });
 
