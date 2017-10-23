@@ -177,7 +177,7 @@ function updateResultView(obj){
 
 function postBrokeAsync(obj, callback){
     $.soap({
-        url: 'http://localhost:8005/wsdl?wsdl',
+        url: 'http://139.59.211.36:8005/wsdl?wsdl',
         method: 'broke',
         data: obj,
         timeout: 35000,
