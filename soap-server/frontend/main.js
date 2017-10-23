@@ -179,7 +179,7 @@ broakerForm.addEventListener('submit', function(e){
 function postBroke(obj){
     obj.amount = obj.amount.replace(/\./g, '');
 
-    return fetch('/broke', {
+    return fetch('broke', {
         method: 'POST',
         headers: defaultHeaders,
         body: obj
