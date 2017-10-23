@@ -5,37 +5,6 @@
              xmlns:tns="http://localhost:8000/wsdl/BrokerService.wsdl"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-    <!--<complexType name="offerList">-->
-                <!--<complexContent mixed="false">-->
-                    <!--<restriction base="soapenc:Array">-->
-                        <!--<attribute arrayType='offer[]' ref='soapenc:arrayType' />-->
-                    <!--</restriction>-->
-                <!--</complexContent>-->
-    <!--</complexType>-->
-
-    <complexType name="offer">
-        <all>
-            <element
-                minOccurs="0"
-                maxOccurs="1"
-                name="offerId"
-                type="xsd:integer"
-            />
-            <element
-                minOccurs="0"
-                maxOccurs="1"
-                name="bankName"
-                type="xsd:string"
-            />
-            <element
-                minOccurs="0"
-                maxOccurs="1"
-                name="interestRate"
-                type="xsd:decimal"
-            />
-        </all>
-    </complexType>
-
     <message name="BrokeRequest">
         <part name="ssn" type="xsd:string"/>
         <part name="durationInMonths" type="xsd:integer"/>
@@ -43,7 +12,8 @@
     </message>
 
     <message name="BrokeResponse">
-        <part name="greeting" type="xsd:string"/>
+        <part name="bankName" type="xsd:string"/>
+        <part name="interestRate" type="xsd:decimal"/>
     </message>
 
     <portType name="BrokerPortType">

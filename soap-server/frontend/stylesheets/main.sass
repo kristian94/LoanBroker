@@ -125,9 +125,15 @@ html, body, .content
         border-bottom: 2px solid $c-grey-700
         color: $c-grey-600
 
+      //input[type=text].evaluated
+      //  background: red !important
+
+      input[type=text].evaluated:invalid
+        border-bottom: 2px solid $c-red-200
+
       button
+        cursor: pointer
         grid-column: 1 / span 2
-        //grid-row: 1 / span 2
         align-self: center
         justify-self: center
         font-family: 'Libre Barcode 39 Text', sans-serif
@@ -136,10 +142,12 @@ html, body, .content
         background: none
         color: $c-grey-500
         letter-spacing: 4px
-        transition: 1.25s ease-in
+        transition: .125s ease-in
+
+      button:hover
+        color: $c-grey-300
 
       button:disabled
-        transition: 0.125s ease-in
         color: $c-grey-700
 
 

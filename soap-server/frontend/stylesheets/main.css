@@ -97,7 +97,10 @@ html, body, .content {
       .content .broaker-form-container form input[type=text]:disabled {
         border-bottom: 2px solid #adadad;
         color: #949494; }
+      .content .broaker-form-container form input[type=text].evaluated:invalid {
+        border-bottom: 2px solid #a31b3b; }
       .content .broaker-form-container form button {
+        cursor: pointer;
         grid-column: 1/span 2;
         align-self: center;
         justify-self: center;
@@ -107,9 +110,10 @@ html, body, .content {
         background: none;
         color: #7a7a7a;
         letter-spacing: 4px;
-        transition: 1.25s ease-in; }
+        transition: 0.125s ease-in; }
+      .content .broaker-form-container form button:hover {
+        color: #474747; }
       .content .broaker-form-container form button:disabled {
-        transition: 0.125s ease-in;
         color: #adadad; }
   .content .footer {
     z-index: 99;
