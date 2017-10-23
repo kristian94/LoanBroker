@@ -1,6 +1,7 @@
 const broakerForm = document.forms['broaker'];
+const defaultHeaders = new Headers();
 
-
+defaultHeaders.append("Content-Type", "application/json");
 
 // console.log(soap)
 // const soap = (function(){
@@ -154,64 +155,41 @@ broakerForm.addEventListener('submit', function(e){
     // }, 1500);
     //TESTER END
 
-    postBrokeAsync(obj, function(res){
+    postBroke(obj).then(res => {
         updateResultView(res);
         toggleView();
         loader.hide();
-    }, function(){
+    }).catch(err => {
         alert('noget gik galt...');
         loader.hide();
     });
 
+    // postBrokeAsync(obj, function(res){
+    //     updateResultView(res);
+    //     toggleView();
+    //     loader.hide();
+    // }, function(){
+    //     alert('noget gik galt...');
+    //     loader.hide();
+    // });
+
     return false;
 });
+
+function postBroke(obj){
+    return fetch('/broke', {
+        method: 'POST',
+        headers: defaultHeaders,
+        body: obj
+    })
+}
 
 function updateResultView(obj){
     const bankNameEl = document.getElementById('bank-name');
     const interestRateEl = document.getElementById('interest-rate');
 
-    bankNameEl.innerHTML = obj.bankName;
+    bankNameEl.innerHTML = obj.bank;
     interestRateEl.innerHTML = `${obj.interestRate} %`;
-
-}
-
-function postBrokeAsync(obj, callback){
-    $.soap({
-        url: 'http://localhost:8005/wsdl?wsdl',
-        method: 'broke',
-        data: obj,
-        timeout: 35000,
-        success: function (soapResponse) {
-            console.log('hello');
-
-            const responseJson = soapResponse.toJSON();
-
-            // accessing the value that holds the actual reponse
-            let responseObj = responseJson['#document']['soap:Envelope']['soap:Body']['tns:brokeResponse'];
-
-            const objOut = {};
-
-            // looping the responseobject and adding sanitized key/values to objOut
-            for(let key in responseObj){
-                if(responseObj.hasOwnProperty(key) && key !== '$'){
-                    const index = key.indexOf(':');
-                    const newKey = key.substring(index+1);
-                    objOut[newKey] = responseObj[key];
-                }
-            }
-
-            callback(objOut);
-        },
-        error: function (soapResponse) {
-            console.log('noget gik galt???');
-
-            loader.hide();
-            // console.log(objOut);
-
-            // show error
-        }
-    });
-
 }
 
 

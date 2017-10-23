@@ -4,6 +4,7 @@ const messager = require('../modules/messager');
 const express = require('express');
 const app = express();
 
+express.json();
 app.use('/loanbroker', express.static('frontend'));
 
 const publisher = new messager.Publisher('amqp://datdb.cphbusiness.dk', {
@@ -99,9 +100,10 @@ const xml = require('fs').readFileSync('broker-service.wsdl', 'utf8');
 //http server example
 const server = http.createServer(app);
 
-server.listen(8005);
+server.listen(8000);
 
 const soapServer = soap.listen(server, '/wsdl', brokerService, xml);
+
 
 
 // soapServer.addSoapHeader(function(func){
