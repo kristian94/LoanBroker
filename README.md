@@ -12,6 +12,38 @@ https://github.com/CBorum/go-loan-broker
 
 ## Process flow scenario
 
+Vi har valgt at lave en hjemmeside til at interagere med vores system. Man bliver derfor mødt med en input boks, der kræver de nødvendige informtioner til at få en interest rate på det lån man ønsker.
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/LB%20Frontend%20Process%2001.PNG)
+---
+
+Hjemmesiden sørger selv for at formatere ssn, når man indtaster sit ssn.
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/LB%20Frontend%20Process%2002.PNG)
+---
+
+Når systemet har genereret en credit score og været igennem rule base bliver request'et sendt videre til routeren/Recip-list'en. Routeren sørger for at sende tilbuddet videre til de banker, der blev bestemt i rule base'en. På billedet kan de ses, hvilke queue's der skal sendes til, og hver translator lytter på en bestemt queue.
+Samtidig sender routeren også data til aggregatoren, så aggregatoren ved, hvor mange banker der fik tilbud - og dermed hvor mange svar aggregatoren skal vendte på.
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/recip-list.png)
+---
+
+Her ses en af flere translators. Translatoren sørger for at oversætte det JSON-objekt som kommer fra routeren til den specifikke bank. Translatoren fra SOAP banken som ses neden under sørger også for at sende svaret fra banken videre til normalizer. 
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/translator-log.png)
+---
+
+Efter normalizeren har fået alle svarene fra bankerne, omformer den svarene til et bestemt format og tilføjer bank-navnet i requestet. 
+Herefter er den aggregatorens ansvar at bestemme det bedste tilbud, og til slut sende det tilbage til frontenden.
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/Screen%20Shot%202017-10-23%20at%2021.57.27.png)
+---
+
+Til sidst ses det tilbud som systemet vurderede til at være det bedste.
+
+![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/LB%20Frontend%20Process%2003.PNG)
+---
+
 ## UML Diagrams
 
 ### "Class" diagram
