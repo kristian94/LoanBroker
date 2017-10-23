@@ -15,3 +15,9 @@ https://github.com/CBorum/go-loan-broker
 ### "Class" diagram
 
 ### Sequence diagram 
+
+## Bottlenecks and enhancements
+
+## Testability
+
+## Web service description
