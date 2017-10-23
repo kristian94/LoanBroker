@@ -1,4 +1,10 @@
 # LoanBroker - Gruppe 4
+
+### Working demo
+http://139.59.211.36/loanbroker/
+
+---
+
 Da vi alle har lavet forskellige komponenter, og dermed har mange mapper og kodefiler er de ikke alle samlet et sted. Vi linker derfor til de øvrige repos med kode/komponenter.
 
 ### Premium Bank and translator:
@@ -33,8 +39,8 @@ Her ses en af flere translators. Translatoren sørger for at oversætte det JSON
 ![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/translator-log.png)
 ---
 
-Efter normalizeren har fået alle svarene fra bankerne, omformer den svarene til et bestemt format og tilføjer bank-navnet i requestet. 
-Herefter er den aggregatorens ansvar at bestemme det bedste tilbud, og til slut sende det tilbage til frontenden.
+Efter normalizeren har fået alle svarene fra bankerne, omformer den svarene til et bestemt format og tilføjer banknavnet i requestet. 
+Herefter er det aggregatorens ansvar at bestemme det bedste tilbud, og til slut sende det tilbage til frontenden.
 
 ![alt text](https://github.com/kristian94/LoanBroker/blob/master/doc/img/Screen%20Shot%202017-10-23%20at%2021.57.27.png)
 ---
