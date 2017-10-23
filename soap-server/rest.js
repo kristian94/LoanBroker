@@ -110,7 +110,7 @@ app.post('/loanbroker/broke', function(req, res){
         res.status(500);
         res.send('Det lader til at vores servere oplever lidt problemer...');
         ssnProcessList.remove(ssn);
-    }, 5000);
+    }, 50000);
 
     const cancelTimeout = () => clearTimeout(timeoutId);
 
