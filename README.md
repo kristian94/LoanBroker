@@ -30,6 +30,44 @@ Her ses et lille uddrag af vores system som et sekvensdiagram. Da systemet best�
 
 ## Bottlenecks and enhancements
 
+### Normalizer
+Normalizer komponentet kunne have bestået af en router og x antal translators, vi har dog valgt at lave en funktion der formaterer et response, om enten det er JSON eller XML, og derved har vi ikke en lang række translators der skal kodes og holdes styr på.
+
+```go
+func parseLoanResponse(body []byte) (le *bankutil.LoanResponse, err error) {
+	le = &bankutil.LoanResponse{}
+	// Parses normal JSON response
+	err = json.Unmarshal(body, le)
+	if err != nil {
+		// Parses normal XML response
+		err = xml.Unmarshal(body, le)
+		if err != nil {
+			cphle := &bankutil.CPHLoanResponse{}
+			// Parses JSON response from cphbusiness.BankJSON
+			err = json.Unmarshal(body, cphle)
+			if err != nil {
+				return
+			}
+			le.InterestRate = cphle.InterestRate
+			ssn := strconv.Itoa(cphle.Ssn)
+			if len(ssn) < 5 {
+				err = errors.New("Short ssn error")
+				return
+			}
+			le.Ssn = ssn[:len(ssn)-4] + "-" + ssn[len(ssn)-4:]
+		}
+	}
+	if le.InterestRate == 0 || le.Ssn == "" {
+		err = errors.New("Malformed request")
+	}
+	return
+}
+```
+### Aggregator
+Fra vores Router bliver der sendt en message til Aggregator, der beskriver hvor mange resultater der skal ventes på, f.eks. at der skal ventes på tre resultater fra ssn: 123456-1234.
+Hvis der ikke bliver modtaget en message fra Router, bliver der ventet to sekunder før det bedste resultat bliver sendt tilbage, ellers hvis der er to resultater klar bliver de sendt videre med det samme. På denne måde kan vi returnere et resultat meget hurtigt, da vi ved hvornår vi skal stoppe med at lytte på flere svar på et bestemt ssn nummer, og dermed bliver Aggregator ikke en bottleneck. Dog hvis en af bankerne ikke giver noget svar, vil det tage længere tid, men stadig fungerer.
+
+
 ## Testability
 
 ## Web service description
