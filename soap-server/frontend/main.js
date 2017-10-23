@@ -47,8 +47,6 @@ const validation = (function(){
         return revStr.split('').reverse().join('');
     }
 
-
-
     return {
         enable, formatNumber
     }
@@ -78,6 +76,35 @@ amountInputEl.addEventListener('keyup', e => {
     }, 350)
 });
 
+const resetBtnEl = document.getElementById('reset');
+resetBtnEl.addEventListener('click', e => {
+    resetForm();
+    toggleView();
+    disableForm(false);
+});
+
+function toggleView(){
+    const formView = document.querySelector('.broaker-form-container');
+    const resultView = document.querySelector('.broaker-form-results');
+
+    const formViewIsNext = formView.classList.contains('hidden');
+
+    const newView = formViewIsNext ? formView : resultView;
+    const currentView = formViewIsNext ? resultView : formView;
+
+    currentView.classList.add('hidden');
+    setTimeout(_ => {
+        newView.classList.remove('hidden');
+    }, 250)
+}
+
+function resetForm(){
+    broakerForm.ssn.value = '';
+    broakerForm.amount.value = '';
+    broakerForm.duration.value = '';
+
+}
+
 const loader = (function(){
     const el = document.querySelector('.loader');
 
@@ -94,9 +121,9 @@ const loader = (function(){
     }
 })();
 
-function disableForm(){
+function disableForm(disabled){
     [].forEach.call(broakerForm.children, (el) => {
-        el.disabled = true;
+        el.disabled = disabled;
     });
 }
 
@@ -113,11 +140,23 @@ broakerForm.addEventListener('submit', function(e){
 
     console.log('passing obj to postBrokeAsync:', obj);
 
-    disableForm();
-
+    disableForm(true);
     loader.show();
+
+    //TESTER
+    // setTimeout(_ => {
+    //     updateResultView({
+    //         bankName: 'BorumBorum Bank',
+    //         interestRate: 8.125
+    //     });
+    //     toggleView();
+    //     loader.hide();
+    // }, 1500);
+    //TESTER END
+
     postBrokeAsync(obj, function(res){
-        console.log(res);
+        updateResultView(res);
+        toggleView();
         loader.hide();
     }, function(){
         alert('noget gik galt...');
@@ -126,6 +165,15 @@ broakerForm.addEventListener('submit', function(e){
 
     return false;
 });
+
+function updateResultView(obj){
+    const bankNameEl = document.getElementById('bank-name');
+    const interestRateEl = document.getElementById('interest-rate');
+
+    bankNameEl.innerHTML = obj.bankName;
+    interestRateEl.innerHTML = `${obj.interestRate} %`;
+
+}
 
 function postBrokeAsync(obj, callback){
     $.soap({
@@ -155,7 +203,7 @@ function postBrokeAsync(obj, callback){
             callback(objOut);
         },
         error: function (soapResponse) {
-            console.log('noget gik galt???')
+            console.log('noget gik galt???');
 
             loader.hide();
             // console.log(objOut);
@@ -165,5 +213,7 @@ function postBrokeAsync(obj, callback){
     });
 
 }
+
+
 
 

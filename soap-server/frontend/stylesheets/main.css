@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Libre+Barcode+39+Text|Nixie+One");
+@import url("https://fonts.googleapis.com/css?family=Great+Vibes|Libre+Barcode+39+Text|Nixie+One|Open+Sans:300,600,700");
 * {
   margin: 0;
   padding: 0; }
@@ -6,6 +6,10 @@
 html, body, .content {
   width: 100%;
   height: 100%; }
+
+.hidden {
+  opacity: 0;
+  pointer-events: none; }
 
 .loader {
   pointer-events: none;
@@ -38,6 +42,8 @@ html, body, .content {
   grid-template-columns: 1fr 600px 1fr;
   grid-template-rows: 120px 100px 400px 1fr;
   background-image: url("../img/etienne-martin-2000-1333jpg.jpg"); }
+  .content .broaker-form-results, .content .broaker-form-container {
+    transition: 0.25s ease-in; }
   .content .top-bar-bg {
     grid-column: 1/span 3;
     grid-row: 1/span 1;
@@ -56,7 +62,8 @@ html, body, .content {
     color: #616161;
     font-family: "Great Vibes", sans-serif;
     font-size: 70px; }
-  .content .broaker-form-container {
+  .content ._broaker-view, .content .broaker-form-results, .content .broaker-form-container {
+    display: grid;
     grid-column: 2/span 1;
     grid-row: 3/span 1;
     align-self: stretch;
@@ -66,55 +73,104 @@ html, body, .content {
     border: 1px solid #c7c7c7;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.08), 3px 3px 5px 5px rgba(0, 0, 0, 0.05);
     padding: 15px; }
-    .content .broaker-form-container form:valid button {
-      color: #0B7159; }
-    .content .broaker-form-container form {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-right: 1fr 1fr 1fr 1fr; }
-      .content .broaker-form-container form .broaker-label {
-        align-self: center;
-        justify-self: right;
-        font-size: 28px;
-        padding-right: 25px;
-        font-family: "Nixie One", sans-serif;
-        color: #141414; }
-      .content .broaker-form-container form input[type=text] {
-        width: 180px;
-        align-self: center;
-        justify-self: left;
-        background: none;
-        border: none;
-        border-bottom: 2px solid #616161;
-        font-size: 28px;
-        font-family: "Nixie One", sans-serif;
-        color: #474747;
-        transition: 0.11s ease-in; }
-      .content .broaker-form-container form input[type=text]:valid {
-        border-bottom: 2px solid #0B7159; }
-      .content .broaker-form-container form input[type=text]:disabled {
-        border-bottom: 2px solid #adadad;
-        color: #949494; }
-      .content .broaker-form-container form input[type=text].evaluated:invalid {
-        border-bottom: 2px solid #a31b3b; }
-      .content .broaker-form-container form button {
-        cursor: pointer;
-        grid-column: 1/span 2;
-        align-self: center;
-        justify-self: center;
-        font-family: "Libre Barcode 39 Text", sans-serif;
-        border: none;
-        font-size: 50px;
-        background: none;
-        color: #7a7a7a;
-        letter-spacing: 4px;
-        transition: 0.125s ease-in; }
-      .content .broaker-form-container form button:hover {
-        color: #474747; }
-      .content .broaker-form-container form button:disabled {
-        color: #adadad; }
+  .content .broaker-form-results {
+    z-index: 1;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr; }
+    .content .broaker-form-results .header-bg {
+      z-index: 1;
+      border-bottom: 1px solid #e0e0e0; }
+    .content .broaker-form-results h5, .content .broaker-form-results .header-bg {
+      grid-column: 1/span 2;
+      grid-row: 1/span 1; }
+    .content .broaker-form-results button {
+      grid-column: 1/span 2; }
+    .content .broaker-form-results h5 {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 300;
+      font-size: 50px;
+      color: #616161;
+      align-self: center;
+      justify-self: center; }
+    .content .broaker-form-results label, .content .broaker-form-results p {
+      font-size: 30px;
+      font-family: "Nixie One", sans-serif;
+      padding-left: 15px; }
+    .content .broaker-form-results label {
+      align-self: center;
+      justify-self: left;
+      color: #7a7a7a; }
+    .content .broaker-form-results p {
+      align-self: center;
+      justify-self: left;
+      color: #616161;
+      font-weight: 700; }
+    .content .broaker-form-results button {
+      outline: none;
+      align-self: center;
+      justify-self: center;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 10px 50px;
+      border: 3px solid #0B7159;
+      border-radius: 20px;
+      color: #0B7159;
+      transition: 0.125s ease-in; }
+    .content .broaker-form-results button:hover {
+      background: #0B7159;
+      color: white; }
+    .content .broaker-form-results button:active {
+      background: #21a888; }
+  .content .broaker-form-container form:valid button {
+    color: #0B7159; }
+  .content .broaker-form-container form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-right: 1fr 1fr 1fr 1fr; }
+    .content .broaker-form-container form .broaker-label {
+      align-self: center;
+      justify-self: right;
+      font-size: 28px;
+      padding-right: 25px;
+      font-family: "Nixie One", sans-serif;
+      color: #141414; }
+    .content .broaker-form-container form input[type=text] {
+      width: 200px;
+      align-self: center;
+      justify-self: left;
+      background: none;
+      border: none;
+      border-bottom: 2px solid #616161;
+      font-size: 28px;
+      font-family: "Nixie One", sans-serif;
+      color: #474747;
+      transition: 0.11s ease-in; }
+    .content .broaker-form-container form input[type=text]:valid {
+      border-bottom: 2px solid #0B7159; }
+    .content .broaker-form-container form input[type=text]:disabled {
+      border-bottom: 2px solid #adadad;
+      color: #949494; }
+    .content .broaker-form-container form input[type=text].evaluated:invalid {
+      border-bottom: 2px solid #a31b3b; }
+    .content .broaker-form-container form button {
+      cursor: pointer;
+      grid-column: 1/span 2;
+      align-self: center;
+      justify-self: center;
+      font-family: "Libre Barcode 39 Text", sans-serif;
+      border: none;
+      font-size: 50px;
+      background: none;
+      color: #7a7a7a;
+      letter-spacing: 4px;
+      transition: 0.125s ease-in; }
+    .content .broaker-form-container form button:hover {
+      color: #474747; }
+    .content .broaker-form-container form button:disabled {
+      color: #adadad; }
   .content .footer {
     z-index: 99;
     grid-column: 1/span 99;

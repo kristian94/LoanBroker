@@ -1,5 +1,5 @@
 @import 'variables'
-@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Libre+Barcode+39+Text|Nixie+One')
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Libre+Barcode+39+Text|Nixie+One|Open+Sans:300,600,700')
 
 $top-bar-height: 120px
 
@@ -10,6 +10,10 @@ $top-bar-height: 120px
 html, body, .content
   width: 100%
   height: 100%
+
+.hidden
+  opacity: 0
+  pointer-events: none
 
 .loader
   pointer-events: none
@@ -27,7 +31,6 @@ html, body, .content
   justify-self: center
   align-self: center
 
-
 @-webkit-keyframes spin
   0%
     -webkit-transform: rotate(0deg)
@@ -41,13 +44,15 @@ html, body, .content
     transform: rotate(360deg)
 
 
-
 .content
   display: grid
   grid-template-columns: 1fr 600px 1fr
   grid-template-rows: $top-bar-height 100px 400px 1fr
   background-image: url('../img/etienne-martin-2000-1333jpg.jpg')
 
+
+  .broaker-form-results, .broaker-form-container
+    transition: .25s ease-in
 
   .top-bar-bg
     grid-column: 1 / span 3
@@ -70,13 +75,10 @@ html, body, .content
     font-family: 'Great Vibes', sans-serif
     font-size: 70px
 
-
-  .broaker-form-container
-    //width: 600px
-    //margin-top: 100px
+  ._broaker-view
+    display: grid
     grid-column: 2 / span 1
     grid-row: 3 / span 1
-    //background: black
     align-self: stretch
     justify-self: stretch
     background: white
@@ -84,6 +86,72 @@ html, body, .content
     border: 1px solid $c-grey-800
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.08), 3px 3px 5px 5px rgba(0,0,0,0.05)
     padding: 15px
+
+  .broaker-form-results
+    @extend ._broaker-view
+    z-index: 1
+    grid-template-columns: 1fr 1fr
+    grid-template-rows: 1fr 1fr 1fr 1fr
+
+    .header-bg
+      z-index: 1
+      border-bottom: 1px solid $c-grey-900
+
+    h5, .header-bg
+      grid-column: 1 / span 2
+      grid-row: 1 / span 1
+
+    button
+      grid-column: 1 / span 2
+
+    h5
+      font-family: 'Open Sans', sans-serif
+      font-weight: 300
+      font-size: 50px
+      color: $c-grey-400
+      align-self: center
+      justify-self: center
+
+    label, p
+      font-size: 30px
+      font-family: "Nixie One", sans-serif
+      padding-left: 15px
+
+    label
+      align-self: center
+      justify-self: left
+      color: $c-grey-500
+
+    p
+      align-self: center
+      justify-self: left
+      color: $c-grey-400
+      font-weight: 700
+
+
+    button
+      outline: none
+      align-self: center
+      justify-self: center
+      font-family: "Open Sans", sans-serif
+      font-weight: 600
+      font-size: 18px
+      padding: 10px 50px
+      border: 3px solid $c-green-100
+      border-radius: 20px
+      color: $c-green-100
+      transition: .125s ease-in
+
+    button:hover
+      background: $c-green-100
+      color: white
+
+    button:active
+      background: $c-green-300
+
+
+  .broaker-form-container
+    @extend ._broaker-view
 
     form:valid button
       color: $c-green-100
@@ -103,10 +171,8 @@ html, body, .content
         font-family: 'Nixie One', sans-serif
         color: $c-grey-100
 
-
-
       input[type=text]
-        width: 180px
+        width: 200px
         align-self: center
         justify-self: left
         background: none
