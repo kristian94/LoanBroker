@@ -9,4 +9,4 @@ https://github.com/xNoga/LoanBroker-PremiumBank
 https://github.com/xNoga/LoanBroker-RecipList
 
 ### Aggregator, Normalizer, BorumBorumBank, translators
-github.com/CBorum/go-loan-broker
+https://github.com/CBorum/go-loan-broker
