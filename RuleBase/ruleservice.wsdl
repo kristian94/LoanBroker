@@ -1,0 +1,49 @@
+<definitions name="RuleService"
+                  targetNamespace="http://www.examples.com/wsdl/RuleService.wsdl"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://www.examples.com/wsdl/RuleService.wsdl"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <message name="RuleRequest">
+        <part name="firstName" type="xsd:string"/>
+    </message>
+    <message name="RuleResponse">
+        <part name="greeting" type="xsd:string"/>
+    </message>
+
+    <portType name="Rule_PortType">
+        <operation name="getRule">
+            <input message="tns:RuleRequest"/>
+            <output message="tns:RuleResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="Rule_Binding" type="tns:Rule_PortType">
+        <soap:binding style="rpc"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="getRule">
+            <soap:operation soapAction="getRule"/>
+            <input>
+                <soap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="urn:examples:helloservice"
+                        use="encoded"/>
+            </input>
+            <output>
+                <soap:body
+                        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+                        namespace="urn:examples:helloservice"
+                        use="encoded"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="Rule_Service">
+        <documentation>WSDL File for RuleService</documentation>
+        <port binding="tns:Rule_Binding" name="Rule_Port">
+            <soap:address
+                    location="http://localhost:8000/wsdl"/>
+        </port>
+    </service>
+</definitions>
