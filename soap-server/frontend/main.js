@@ -129,7 +129,7 @@ broakerForm.addEventListener('submit', function(e){
 
 function postBrokeAsync(obj, callback){
     $.soap({
-        url: 'http://localhost:8000/wsdl?wsdl',
+        url: 'http://localhost:8005/wsdl?wsdl',
         method: 'broke',
         data: obj,
         timeout: 35000,
