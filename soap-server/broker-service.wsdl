@@ -1,8 +1,8 @@
 <definitions name="BrokerService"
-             targetNamespace="http://localhost:8000/wsdl/BrokerService.wsdl"
+             targetNamespace="http://localhost:8005/wsdl/BrokerService.wsdl"
              xmlns="http://schemas.xmlsoap.org/wsdl/"
              xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="http://localhost:8000/wsdl/BrokerService.wsdl"
+             xmlns:tns="http://localhost:8005/wsdl/BrokerService.wsdl"
              xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <message name="BrokeRequest">
@@ -31,14 +31,14 @@
             <input>
                 <soap:body
                         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                        namespace="urn:localhost:8000:helloservice"
+                        namespace="urn:localhost:8005:helloservice"
                         use="encoded"/>
             </input>
 
             <output>
                 <soap:body
                         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-                        namespace="urn:localhost:8000:helloservice"
+                        namespace="urn:localhost:8005:helloservice"
                         use="encoded"/>
             </output>
         </operation>
@@ -48,7 +48,7 @@
         <documentation>WSDL File for HelloService</documentation>
         <port binding="tns:BrokerBinding" name="BrokerPort">
             <soap:address
-                    location="http://localhost:8000/wsdl" />
+                    location="http://localhost:8005/wsdl" />
         </port>
     </service>
 </definitions>
