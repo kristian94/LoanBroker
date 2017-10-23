@@ -9,3 +9,9 @@ https://github.com/xNoga/LoanBroker-RecipList
 
 ### Aggregator, Normalizer, BorumBorumBank & translator, XML+JSON-banks translators
 https://github.com/CBorum/go-loan-broker
+
+## UML Diagrams
+
+### "Class" diagram
+
+### Sequence diagram 
