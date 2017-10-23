@@ -198,7 +198,7 @@ function ajaxPostBroke(obj, s, e){
 function updateResultView(obj){
     const bankNameEl = document.getElementById('bank-name');
     const interestRateEl = document.getElementById('interest-rate');
-    
+
     const bankName = obj.bank;
     const decimalFormatted = formatDecimal(obj.interestRate);
 
