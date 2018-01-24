@@ -25,7 +25,7 @@ function onRead(msgIn){
         logger.log('recieved msg (parsed): ' + JSON.stringify(parsedMsg));
 
         creditScore.enhanceMsgWithScore(parsedMsg).then(msgOut => {
-            logger.log('Sending enhanced message to rule base');
+            logger.log('Sending enhanced message to rule base: ' + JSON.stringify(parsedMsg));
 
             publisher.send(msgOut)
         });

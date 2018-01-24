@@ -132,7 +132,7 @@ broakerForm.addEventListener('submit', function(e){
     e.preventDefault();
 
     const ssn = broakerForm.ssn.value;
-    const amount = broakerForm.amount.value;
+    const amount = broakerForm.amount.value.replace(/\./g, '');
     const duration = broakerForm.duration.value;
 
     const obj = {
